@@ -28,9 +28,17 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jPanel3 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        lblTitulo = new javax.swing.JLabel();
+        Menu = new javax.swing.JMenuBar();
+        mnuCadastros = new javax.swing.JMenu();
+        mnuCadastroCliente = new javax.swing.JMenuItem();
+        mnuCadastroProduto = new javax.swing.JMenuItem();
+        mnuComprar = new javax.swing.JMenu();
+        mnuProdutos = new javax.swing.JMenuItem();
+        jMenu1 = new javax.swing.JMenu();
+        jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -39,60 +47,72 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(5, 41, 32));
 
-        jButton1.setBackground(new java.awt.Color(136, 115, 70));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Faça o seu cadastro");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-
-        jButton2.setBackground(new java.awt.Color(136, 115, 70));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 24)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(255, 255, 255));
-        jButton2.setText("Confira nossos produtos");
-        jButton2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-
-        jLabel1.setFont(new java.awt.Font("Sylfaen", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("BEM VINDOS AO EMPORIO DA MUSICA");
-        jLabel1.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
+        lblTitulo.setBackground(new java.awt.Color(255, 255, 255));
+        lblTitulo.setFont(new java.awt.Font("Sylfaen", 1, 24)); // NOI18N
+        lblTitulo.setForeground(new java.awt.Color(255, 255, 255));
+        lblTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblTitulo.setText("BEM VINDOS AO EMPORIO DA MUSICA");
+        lblTitulo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 5));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(165, 165, 165)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addComponent(jLabel1)))
-                .addContainerGap(149, Short.MAX_VALUE))
+                .addGap(65, 65, 65)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 500, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(75, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGap(38, 38, 38)
-                .addComponent(jLabel1)
-                .addGap(75, 75, 75)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(175, Short.MAX_VALUE))
+                .addGap(171, 171, 171)
+                .addComponent(lblTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(229, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 710, 500));
+        jPanel1.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 640, 500));
+
+        Menu.setBorder(null);
+        Menu.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+
+        mnuCadastros.setText("Cadastros");
+
+        mnuCadastroCliente.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        mnuCadastroCliente.setText("Cadastro Cliente");
+        mnuCadastros.add(mnuCadastroCliente);
+
+        mnuCadastroProduto.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        mnuCadastroProduto.setText("Cadatro Produto");
+        mnuCadastros.add(mnuCadastroProduto);
+
+        Menu.add(mnuCadastros);
+
+        mnuComprar.setText("Comprar");
+
+        mnuProdutos.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        mnuProdutos.setText("Produtos");
+        mnuComprar.add(mnuProdutos);
+
+        Menu.add(mnuComprar);
+
+        jMenu1.setText("Consultas");
+
+        jMenuItem1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItem1.setText("Relatorio de Vendas");
+        jMenu1.add(jMenuItem1);
+
+        jMenuItem2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItem2.setText("Consulta Cliente");
+        jMenu1.add(jMenuItem2);
+
+        jMenuItem3.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jMenuItem3.setText("Consultar Venda");
+        jMenu1.add(jMenuItem3);
+
+        Menu.add(jMenu1);
+
+        setJMenuBar(Menu);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -107,10 +127,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -148,10 +164,18 @@ public class TelaPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JMenuBar Menu;
+    private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenuItem jMenuItem1;
+    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblTitulo;
+    private javax.swing.JMenuItem mnuCadastroCliente;
+    private javax.swing.JMenuItem mnuCadastroProduto;
+    private javax.swing.JMenu mnuCadastros;
+    private javax.swing.JMenu mnuComprar;
+    private javax.swing.JMenuItem mnuProdutos;
     // End of variables declaration//GEN-END:variables
 }

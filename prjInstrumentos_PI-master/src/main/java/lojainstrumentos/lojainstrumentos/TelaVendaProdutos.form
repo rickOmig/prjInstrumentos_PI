@@ -108,11 +108,13 @@
                       </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jtxtCampo_CPF" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="jFormattedTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="lblDigiteCPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFormattedTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="lblDigiteCPF" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
@@ -124,7 +126,7 @@
                       <Component id="lblValorTotal" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
-                  <Component id="btnFinalizarCompra" linkSize="2" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnFinalizarCompra" min="-2" max="-2" attributes="0"/>
                   <EmptySpace pref="70" max="32767" attributes="0"/>
               </Group>
           </Group>
