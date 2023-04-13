@@ -214,7 +214,7 @@ public class TelaCadastro extends javax.swing.JFrame {
                 CadastrarActionPerformed(evt);
             }
         });
-        jPanel1.add(Cadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 160, 50));
+        jPanel1.add(Cadastrar, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 450, 150, 40));
 
         try {
             campo_telefone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##)#####-####")));
