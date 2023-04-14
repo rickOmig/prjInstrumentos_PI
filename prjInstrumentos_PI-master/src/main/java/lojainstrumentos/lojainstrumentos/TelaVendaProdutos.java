@@ -37,13 +37,13 @@ public class TelaVendaProdutos extends javax.swing.JFrame {
         jScrollPane2 = new javax.swing.JScrollPane();
         tableVenda = new javax.swing.JTable();
         btnFinalizarCompra = new javax.swing.JButton();
-        jtxtCampo_CPF = new javax.swing.JFormattedTextField();
+        Campo_CPF = new javax.swing.JFormattedTextField();
         TelaVendas = new javax.swing.JLabel();
         lblValorTotal = new javax.swing.JLabel();
-        jtxtValorTotal = new javax.swing.JFormattedTextField();
+        valor_total = new javax.swing.JFormattedTextField();
         spnQuantidade = new javax.swing.JSpinner();
         jLabel1 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
+        campo_data = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         btnRemover = new javax.swing.JButton();
         btnAdicionar = new javax.swing.JButton();
@@ -102,13 +102,13 @@ public class TelaVendaProdutos extends javax.swing.JFrame {
         });
 
         try {
-            jtxtCampo_CPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            Campo_CPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jtxtCampo_CPF.addActionListener(new java.awt.event.ActionListener() {
+        Campo_CPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jtxtCampo_CPFActionPerformed(evt);
+                Campo_CPFActionPerformed(evt);
             }
         });
 
@@ -126,7 +126,7 @@ public class TelaVendaProdutos extends javax.swing.JFrame {
         jLabel1.setText("Data  :");
 
         try {
-            jFormattedTextField1.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
+            campo_data.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -186,7 +186,7 @@ public class TelaVendaProdutos extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblDigiteCPF)
                                 .addGap(18, 18, 18)
-                                .addComponent(jtxtCampo_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(Campo_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(lblProdutos)
                                 .addGap(18, 18, 18)
@@ -198,11 +198,11 @@ public class TelaVendaProdutos extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(spnQuantidade)
-                            .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(campo_data, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(lblValorTotal)
                         .addGap(18, 18, 18)
-                        .addComponent(jtxtValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(valor_total, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(btnFinalizarCompra)
                     .addComponent(jScrollPane2)
                     .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -226,18 +226,19 @@ public class TelaVendaProdutos extends javax.swing.JFrame {
                         .addComponent(lblQuantidade)
                         .addComponent(spnQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtxtCampo_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblDigiteCPF))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Campo_CPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1)
+                        .addComponent(campo_data, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblDigiteCPF)))
                 .addGap(18, 18, 18)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(39, 39, 39)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jtxtValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(valor_total, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblValorTotal))
                 .addGap(48, 48, 48)
                 .addComponent(btnFinalizarCompra)
@@ -263,17 +264,25 @@ public class TelaVendaProdutos extends javax.swing.JFrame {
     private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCompraActionPerformed
         // validação obrigatoria
         
+        if(Campo_CPF.getText().replace(".","").replace("-","").trim().equals("")){
+            JOptionPane.showMessageDialog(this, "Digite o CPF");
+        }
+        
+        if(campo_data.getText().replace("/","").replace("-","").trim().equals("")){
+            JOptionPane.showMessageDialog(this, "Digite a data de nascimento");
+        }
+        
         if(this.selecao_produto == null){
             JOptionPane.showMessageDialog(null,"Selecione um produto");
         }
-        if(this.Quantidade == null){
+        if(this.spnQuantidade == null){
             JOptionPane.showMessageDialog(null,"Selecione um quantidade");
         }
     }//GEN-LAST:event_btnFinalizarCompraActionPerformed
 
-    private void jtxtCampo_CPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtCampo_CPFActionPerformed
+    private void Campo_CPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Campo_CPFActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jtxtCampo_CPFActionPerformed
+    }//GEN-LAST:event_Campo_CPFActionPerformed
 
     private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
         // TODO add your handling code here:
@@ -315,17 +324,16 @@ public class TelaVendaProdutos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFormattedTextField Campo_CPF;
     private javax.swing.JLabel TelaVendas;
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnFinalizarCompra;
     private javax.swing.JButton btnRemover;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
+    private javax.swing.JFormattedTextField campo_data;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JFormattedTextField jtxtCampo_CPF;
-    private javax.swing.JFormattedTextField jtxtValorTotal;
     private javax.swing.JLabel lblDigiteCPF;
     private javax.swing.JLabel lblProdutos;
     private javax.swing.JLabel lblQuantidade;
@@ -334,5 +342,6 @@ public class TelaVendaProdutos extends javax.swing.JFrame {
     private javax.swing.JList<String> selecao_produto;
     private javax.swing.JSpinner spnQuantidade;
     private javax.swing.JTable tableVenda;
+    private javax.swing.JFormattedTextField valor_total;
     // End of variables declaration//GEN-END:variables
 }

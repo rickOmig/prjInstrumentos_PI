@@ -26,4 +26,5 @@
         <maven.compiler.target>19</maven.compiler.target>
         <exec.mainClass>lojainstrumentos.lojainstrumentos.Mavenproject8</exec.mainClass>
     </properties>
+    <name>novomavenproject8</name>
 </project>

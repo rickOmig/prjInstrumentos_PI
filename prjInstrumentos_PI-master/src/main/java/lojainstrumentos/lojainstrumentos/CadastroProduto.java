@@ -44,8 +44,8 @@ public class CadastroProduto extends javax.swing.JFrame {
         inserir = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        consultar = new javax.swing.JButton();
+        campo_consultar = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -138,14 +138,14 @@ public class CadastroProduto extends javax.swing.JFrame {
         jButton3.setText("Alterar");
         jButton3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
 
-        jButton4.setBackground(new java.awt.Color(136, 115, 70));
-        jButton4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton4.setForeground(new java.awt.Color(255, 255, 255));
-        jButton4.setText("Consultar");
-        jButton4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        consultar.setBackground(new java.awt.Color(136, 115, 70));
+        consultar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        consultar.setForeground(new java.awt.Color(255, 255, 255));
+        consultar.setText("Consultar");
+        consultar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        consultar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                consultarActionPerformed(evt);
             }
         });
 
@@ -161,9 +161,9 @@ public class CadastroProduto extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addComponent(jTextField1)
+                .addComponent(campo_consultar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
+                .addComponent(consultar)
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -174,12 +174,12 @@ public class CadastroProduto extends javax.swing.JFrame {
                     .addComponent(inserir)
                     .addComponent(jButton2)
                     .addComponent(jButton3)
-                    .addComponent(jButton4)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(consultar)
+                    .addComponent(campo_consultar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {inserir, jButton2, jButton3, jButton4});
+        jPanel2Layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {consultar, inserir, jButton2, jButton3});
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -276,9 +276,13 @@ public class CadastroProduto extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    private void consultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultarActionPerformed
+        // validação de obrigatoriedade
+        if(campo_consultar.getText().trim().equals("")){
+            JOptionPane.showMessageDialog(this, "Digite o  item que quer consultar");
+            return;
+        }
+    }//GEN-LAST:event_consultarActionPerformed
 
     private void descricao_produtoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_descricao_produtoActionPerformed
         // TODO add your handling code here:
@@ -286,13 +290,7 @@ public class CadastroProduto extends javax.swing.JFrame {
 
     private void inserirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inserirActionPerformed
         
-        try {
-            double quantidadeConvert = Double.parseDouble(campo_quantidade.getText());
-        }
-        
-        catch (Exception e) {
-            JOptionPane.showMessageDialog(this, "Insira apenas numeros");
-        }
+       
         
         //validar campos obrigatorio
         if(nome_produto.getText().trim().equals("")){
@@ -312,11 +310,16 @@ public class CadastroProduto extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, "Digite a descrição do produto");
             return;
         }
-        if(preco_produto.getText().trim().equals("")){
-            JOptionPane.showMessageDialog(this, "Digite o preço do produto");
-            return;
+        
+        if(preco_produto.getText().replace(",","").trim().equals("")){
+            JOptionPane.showMessageDialog(this, "Digite o preço");
         }
         
+        //validação de quantiddes de caracteres
+        if (descricao_produto.getText().length()>10){
+         JOptionPane.showMessageDialog(rootPane,"não ultilizar mais de 10 caracteres!");
+        }
+         
     }//GEN-LAST:event_inserirActionPerformed
 
     private void campo_quantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campo_quantidadeActionPerformed
@@ -363,13 +366,14 @@ public class CadastroProduto extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField campo_consultar;
     private javax.swing.JFormattedTextField campo_quantidade;
     private javax.swing.JFormattedTextField cod_produto;
+    private javax.swing.JButton consultar;
     private javax.swing.JTextField descricao_produto;
     private javax.swing.JButton inserir;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -380,7 +384,6 @@ public class CadastroProduto extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField nome_produto;
     private javax.swing.JFormattedTextField preco_produto;
     // End of variables declaration//GEN-END:variables

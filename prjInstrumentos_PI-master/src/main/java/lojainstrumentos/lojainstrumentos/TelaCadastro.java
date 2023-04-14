@@ -240,8 +240,8 @@ public class TelaCadastro extends javax.swing.JFrame {
     private void CadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastrarActionPerformed
         
         //validação de quantidade de 
-        if (campo_nome.getText().isEmpty()&& campo_nome.getText().length()>5){
-         JOptionPane.showMessageDialog(rootPane,"não ultilizar mais de 50 caracteres!");
+        if (campo_nome.getText().isEmpty()&& campo_nome.getText().length()>10){
+         JOptionPane.showMessageDialog(rootPane,"não ultilizar mais de 10 caracteres!");
         }
         //validar campos obrigatorio
         if(campo_nome.getText().trim().equals("")){
