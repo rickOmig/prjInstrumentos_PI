@@ -109,10 +109,17 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
                       <Component id="Campo_CPF" alignment="0" min="-2" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="3" attributes="0">
                           <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
                           <Component id="campo_data" alignment="3" min="-2" max="-2" attributes="0"/>
+=======
+                      <Component id="jtxtCampo_CPF" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="jFormattedTextField1" alignment="3" min="-2" max="-2" attributes="0"/>
+>>>>>>> 546392150d7734c166138f58a7beb1ed044ae5e4
                           <Component id="lblDigiteCPF" alignment="3" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
