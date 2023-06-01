@@ -82,7 +82,7 @@ public class TelaVendaProdutos extends javax.swing.JDialog {
 
         lblDigiteCPF.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblDigiteCPF.setForeground(new java.awt.Color(255, 255, 255));
-        lblDigiteCPF.setText("Digite seu CPF :");
+        lblDigiteCPF.setText("ID do Cliente:");
 
         lblQuantidade.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblQuantidade.setForeground(new java.awt.Color(255, 255, 255));
@@ -93,7 +93,7 @@ public class TelaVendaProdutos extends javax.swing.JDialog {
 
             },
             new String [] {
-                "ID", "NOME", "QTD", "PREÇO", "DESCRICAO"
+                "ID", "NOME", "QTD", "PREÇO UNI.", "DESCRIÇÃO"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -135,6 +135,13 @@ public class TelaVendaProdutos extends javax.swing.JDialog {
         lblValorTotal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblValorTotal.setForeground(new java.awt.Color(255, 255, 255));
         lblValorTotal.setText("VALOR TOTAL : ");
+
+        jtxtValorTotal.setEditable(false);
+        jtxtValorTotal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jtxtValorTotalActionPerformed(evt);
+            }
+        });
 
         spnQuantidade.setModel(new javax.swing.SpinnerNumberModel(1, 1, null, 1));
 
@@ -271,12 +278,12 @@ public class TelaVendaProdutos extends javax.swing.JDialog {
             ArrayList<Venda> listaRetorno = new ArrayList<Venda>();
             for (int i = 0; i < tableCarrinho.getRowCount(); i++) {
                 Venda obj = new Venda();
-                //obj.setidProd((Integer) carrinho.getValueAt(i, 0));
+                obj.setidProd(Integer.parseInt(carrinho.getValueAt(i, 0).toString()));
                 obj.setProdutoVendido(carrinho.getValueAt(i, 1).toString());
                 double qtd = Double.parseDouble(String.valueOf((carrinho.getValueAt(i, 2))));
                 obj.setQuantidadeVenda(qtd);
                 double valor = Double.parseDouble(String.valueOf((carrinho.getValueAt(i, 3))));
-                obj.setValorTotal(valor);
+                obj.setValorTotal(valor * qtd);
                 obj.setDescricaoProd(carrinho.getValueAt(i, 4).toString());
                 obj.setIdCliente(Integer.parseInt(jtxtCampo_CPF.getText()));
 
@@ -312,8 +319,13 @@ public class TelaVendaProdutos extends javax.swing.JDialog {
             spnQuantidade.getValue(),
             produtos.getValueAt(linhaSelecionada, 3).toString(),
             produtos.getValueAt(linhaSelecionada, 4).toString()};
-
+        
+        double quantidade =+ Double.parseDouble(spnQuantidade.getValue().toString());
+        double precoUnitario =+ Double.parseDouble(produtos.getValueAt(linhaSelecionada, 3).toString());
+        double valorTotal = precoUnitario*quantidade;
         carrinho.addRow(dados);
+
+        jtxtValorTotal.setText(String.valueOf(valorTotal));
         /*ArrayList<Venda> listaRetorno = new ArrayList<Venda>();
         for (int i = 0; i <= tableCarrinho.getRowCount(); i++) {
             Venda obj = new Venda();
@@ -328,6 +340,10 @@ public class TelaVendaProdutos extends javax.swing.JDialog {
 
 
     }//GEN-LAST:event_btnAdicionarActionPerformed
+
+    private void jtxtValorTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtValorTotalActionPerformed
+ 
+    }//GEN-LAST:event_jtxtValorTotalActionPerformed
 
     /**
      * @param args the command line arguments

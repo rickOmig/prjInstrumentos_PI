@@ -1,5 +1,7 @@
 C:\Users\mathe\Documents\Netbeans Projects\prjInstrumentos_PI-master\src\main\java\lojainstrumentos\lojainstrumentos\LojaInstrumentos.java
 C:\Users\mathe\Documents\Netbeans Projects\prjInstrumentos_PI-master\src\main\java\lojainstrumentos\model\Produto.java
+C:\Users\mathe\Documents\Netbeans Projects\prjInstrumentos_PI-master\src\main\java\lojainstrumentos\view\TelaVendaProdutosDeprecated.java
+C:\Users\mathe\Documents\Netbeans Projects\prjInstrumentos_PI-master\src\main\java\lojainstrumentos\dao\VendasDAO.java
 C:\Users\mathe\Documents\Netbeans Projects\prjInstrumentos_PI-master\src\main\java\lojainstrumentos\model\Cliente.java
 C:\Users\mathe\Documents\Netbeans Projects\prjInstrumentos_PI-master\src\main\java\lojainstrumentos\view\TelaCadastro.java
 C:\Users\mathe\Documents\Netbeans Projects\prjInstrumentos_PI-master\src\main\java\lojainstrumentos\view\TelaRelatorioVendas.java
@@ -11,3 +13,4 @@ C:\Users\mathe\Documents\Netbeans Projects\prjInstrumentos_PI-master\src\main\ja
 C:\Users\mathe\Documents\Netbeans Projects\prjInstrumentos_PI-master\src\main\java\lojainstrumentos\view\TelaPrincipal.java
 C:\Users\mathe\Documents\Netbeans Projects\prjInstrumentos_PI-master\src\main\java\lojainstrumentos\dao\ClientesDAO.java
 C:\Users\mathe\Documents\Netbeans Projects\prjInstrumentos_PI-master\src\main\java\lojainstrumentos\model\Venda.java
+C:\Users\mathe\Documents\Netbeans Projects\prjInstrumentos_PI-master\src\main\java\lojainstrumentos\view\AlterarCliente.java

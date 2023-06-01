@@ -93,7 +93,6 @@ public class TelaCadastro extends javax.swing.JDialog {
         jLabel3 = new javax.swing.JLabel();
         Cadastrar = new javax.swing.JButton();
         campo_telefone = new javax.swing.JFormattedTextField();
-        jButton1 = new javax.swing.JButton();
         campo_data = new javax.swing.JFormattedTextField();
 
         jTextField1.setText("jTextField1");
@@ -257,14 +256,6 @@ public class TelaCadastro extends javax.swing.JDialog {
         }
         jPanel1.add(campo_telefone, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 220, 130, 30));
 
-        jButton1.setText("teste");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 460, -1, -1));
-
         try {
             campo_data.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -400,10 +391,6 @@ public class TelaCadastro extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_campo_emailActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-
-    }//GEN-LAST:event_jButton1ActionPerformed
-
     /**
      * @param args the command line arguments
      */
@@ -451,7 +438,6 @@ public class TelaCadastro extends javax.swing.JDialog {
     private javax.swing.JFormattedTextField campo_telefone;
     private javax.swing.ButtonGroup estadoCivil;
     private javax.swing.ButtonGroup genero;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

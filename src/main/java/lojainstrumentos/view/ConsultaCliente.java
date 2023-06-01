@@ -30,7 +30,7 @@ public class ConsultaCliente extends javax.swing.JDialog {
         DefaultTableModel modelo = (DefaultTableModel) tabelaClientes.getModel();
 
         //Zera tabela
-        modelo.setRowCount(1);
+        modelo.setRowCount(0);
 
         //Adicionar linhas com for
         for (Cliente item : ClientesDAO.pesquisarCliente(cpf)) {

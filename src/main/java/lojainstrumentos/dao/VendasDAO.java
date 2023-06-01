@@ -4,12 +4,15 @@
  */
 package lojainstrumentos.dao;
 
+import com.toedter.calendar.JDateChooser;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import javax.swing.JOptionPane;
 import lojainstrumentos.model.Venda;
 
@@ -34,16 +37,18 @@ public class VendasDAO {
 
             //3- Preparar comando SQL
             PreparedStatement comandoSQL = conexao.prepareStatement(
-                    "INSERT INTO venda (nome_produto, quantidade, valorTotal, descricao, ClienteID)" + "VALUES(?, ?, ?, ?, ?)");
+                    "INSERT INTO venda (CodigoProduto, nome_produto, quantidade, valorTotal, descricao, ClienteID)" + "VALUES(?, ?, ?, ?, ?, ?)");
 
             PreparedStatement comandoSQL2 = conexao.prepareStatement(
-                    "UPDATE PRODUTOS set Quantidade = Quantidade - " + pObj.getQuantidadeVenda());
+                    "UPDATE PRODUTOS set Quantidade = Quantidade - " + pObj.getQuantidadeVenda()
+                            + "WHERE CodigoProduto = " + pObj.getidProd());
 
-            comandoSQL.setString(1, pObj.getProdutoVendido());
-            comandoSQL.setDouble(2, pObj.getQuantidadeVenda());
-            comandoSQL.setDouble(3, pObj.getValorTotal());
-            comandoSQL.setString(4, pObj.getDescricaoProd());
-            comandoSQL.setInt(5, pObj.getIdCliente());
+            comandoSQL.setInt(1, pObj.getidProd());
+            comandoSQL.setString(2, pObj.getProdutoVendido());
+            comandoSQL.setDouble(3, pObj.getQuantidadeVenda());
+            comandoSQL.setDouble(4, pObj.getValorTotal());
+            comandoSQL.setString(5, pObj.getDescricaoProd());
+            comandoSQL.setInt(6, pObj.getIdCliente());
 
             //4- Executar comando
             rs = comandoSQL.executeQuery("select Quantidade from Produtos");
@@ -109,10 +114,9 @@ public class VendasDAO {
         return listaRetorno;
     }
 
-    public static boolean atualizarProduto(Venda pObj) {
-        boolean retorno = false;
+    public static ArrayList<Venda> listarVenda(Venda venda) {
+        ArrayList<Venda> listaRetorno = new ArrayList<Venda>();
         Connection conexao = null;
-
         try {
             //1- Carregar o Driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -122,37 +126,45 @@ public class VendasDAO {
             conexao = DriverManager.getConnection(url, "root", "");
 
             //3- Preparar comando SQL
-            PreparedStatement comandoSQL = conexao.prepareStatement(
-                    "UPDATE Produtos SET NomeProduto =?, DescricaoProduto =?, Quantidade =?, Preco =? WHERE CodigoProduto =?");
+            PreparedStatement comandoSQL = conexao.prepareStatement("SELECT venda.quantidade, venda.valorTotal, produtos.NomeProduto "
+                    + "FROM venda "
+                    + "inner join produtos ON venda.CodigoProduto = produtos.CodigoProduto "
+                    + "inner join clientes ON clientes.ClienteID = venda.ClienteID "
+                    + "WHERE CPF = ? && DATE(dataCompra) = ?;");
 
-            //comandoSQL.setString(1, pObj.getNomeProd());
-            //comandoSQL.setString(2, pObj.getDescricaoProd());
-            //comandoSQL.setInt(3, pObj.getQuantidadeProd());
-            //comandoSQL.setDouble(4, pObj.getPrecoProd());
-            //comandoSQL.setInt(5, pObj.getCodigoProd());
+            //SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            //String dataStr = df.format(venda.getData());
+            comandoSQL.setString(1, venda.getCpfCli());
+            comandoSQL.setString(2, venda.getData());
+            //comandoSQL.setDate(2, new java.sql.Date(venda.getData().getTime()));
+
             //4- Executar comando
-            int linhasAfetadas = comandoSQL.executeUpdate();
+            ResultSet rs = comandoSQL.executeQuery();
 
-            if (linhasAfetadas > 0) {
-                retorno = true;
+            if (rs != null) {
+                while (rs.next()) {
+
+                    //Passa dados do result set para obj
+                    Venda obj = new Venda();
+                    obj.setQuantidadeVenda(rs.getInt("venda.quantidade"));
+                    obj.setValorTotal(rs.getInt("venda.valorTotal"));
+                    obj.setProdutoVendido(rs.getString("produtos.NomeProduto"));
+                    //passa obj para lista de retorno
+                    listaRetorno.add(obj);
+                }
             }
 
-            //FIM DO TRY
-        } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar o Driver: " + ex);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao estabelecer conexão com o servidor: " + ex);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar o Driver: " + ex);
         }
-
-        return retorno;
-
-        //FIM DO METODO ATUALIZAR
+        return listaRetorno;
     }
 
-    public static boolean deletarProduto(int cod) {
-        boolean retorno = false;
+        public static ArrayList<Venda> listarVendaPeriodo(Venda venda) {
+        ArrayList<Venda> listaRetorno = new ArrayList<Venda>();
         Connection conexao = null;
-
         try {
             //1- Carregar o Driver
             Class.forName("com.mysql.cj.jdbc.Driver");
@@ -162,27 +174,39 @@ public class VendasDAO {
             conexao = DriverManager.getConnection(url, "root", "");
 
             //3- Preparar comando SQL
-            PreparedStatement comandoSQL = conexao.prepareStatement(
-                    "DELETE FROM Produtos WHERE CodigoProduto =?");
+            PreparedStatement comandoSQL = conexao.prepareStatement("SELECT produtos.NomeProduto, venda.dataCompra, clientes.NomeCompleto, venda.valorTotal  "
+                    + "FROM venda "
+                    + "inner join produtos ON venda.CodigoProduto = produtos.CodigoProduto "
+                    + "inner join clientes ON clientes.ClienteID = venda.ClienteID "
+                    + "WHERE DATE(dataCompra) BETWEEN ? AND ?");
 
-            comandoSQL.setInt(1, cod);
+            //SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+            comandoSQL.setString(1, venda.getDataInicio());
+            comandoSQL.setString(2, venda.getDataFim());
+
             //4- Executar comando
-            int linhasAfetadas = comandoSQL.executeUpdate();
+            ResultSet rs = comandoSQL.executeQuery();
 
-            if (linhasAfetadas > 0) {
-                retorno = true;
+            if (rs != null) {
+                while (rs.next()) {
+
+                    //Passa dados do result set para obj
+                    Venda obj = new Venda();
+                    obj.setProdutoVendido(rs.getString("produtos.NomeProduto"));
+                    obj.setData(rs.getString("venda.dataCompra"));
+                    obj.setNomeCliente(rs.getString("clientes.NomeCompleto"));
+                    obj.setValorTotal(rs.getDouble("venda.valorTotal"));
+                    //passa obj para lista de retorno
+                    listaRetorno.add(obj);
+                }
             }
 
-            //FIM DO TRY
-        } catch (ClassNotFoundException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao carregar o Driver: " + ex);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao estabelecer conexão com o servidor: " + ex);
+        } catch (ClassNotFoundException ex) {
+            JOptionPane.showMessageDialog(null, "Erro ao carregar o Driver: " + ex);
         }
-
-        return retorno;
-
-        //FIM DO METODO ATUALIZAR
+        return listaRetorno;
     }
-
+    
 }

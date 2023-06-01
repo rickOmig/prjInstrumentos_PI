@@ -49,6 +49,7 @@ public class CadastroProduto extends javax.swing.JDialog {
     }
 
     public CadastroProduto(Produto obj) {
+        initComponents();
         //passa os dados para a classe produto
         nome_produto.setText(String.valueOf(obj.getNomeProd()));
         campo_quantidade.setText(String.valueOf(obj.getQuantidadeProd()));

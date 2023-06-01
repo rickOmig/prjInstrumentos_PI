@@ -4,6 +4,13 @@
  */
 package lojainstrumentos.view;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import lojainstrumentos.dao.VendasDAO;
+import lojainstrumentos.model.Venda;
+
 /**
  *
  * @author alves
@@ -15,6 +22,26 @@ public class TelaRelatorioVendas extends javax.swing.JDialog {
      */
     public TelaRelatorioVendas() {
         initComponents();
+    }
+
+    public void readRelatorio(Venda venda) {
+        //Chama DAO para consulta
+        ArrayList<Venda> lista = VendasDAO.listarVendaPeriodo(venda);
+
+        DefaultTableModel modelo = (DefaultTableModel) tabelaPeriodoVendas.getModel();
+
+        //Zera tabela
+        modelo.setRowCount(0);
+
+        //Adicionar linhas com for
+        for (Venda item : VendasDAO.listarVendaPeriodo(venda)) {
+            modelo.addRow(new String[]{
+                String.valueOf(item.getProdutoVendido()),
+                String.valueOf(item.getData()),
+                String.valueOf(item.getNomeCliente()),
+                String.valueOf(item.getValorTotal())}
+            );
+        }
     }
 
     /**
@@ -29,17 +56,16 @@ public class TelaRelatorioVendas extends javax.swing.JDialog {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         table = new javax.swing.JScrollPane();
-        tableVendas = new javax.swing.JTable();
+        tabelaPeriodoVendas = new javax.swing.JTable();
         lblValorTotal = new javax.swing.JLabel();
         txtValorTotal = new javax.swing.JTextField();
-        btnAtualizar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jFormattedTextField1 = new javax.swing.JFormattedTextField();
         jLabel4 = new javax.swing.JLabel();
-        jFormattedTextField2 = new javax.swing.JFormattedTextField();
-        jButton1 = new javax.swing.JButton();
+        btnConsultarRelatorio = new javax.swing.JButton();
+        dataInicial = new com.toedter.calendar.JDateChooser();
+        dataFinal = new com.toedter.calendar.JDateChooser();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocation(new java.awt.Point(600, 300));
@@ -51,7 +77,7 @@ public class TelaRelatorioVendas extends javax.swing.JDialog {
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("RELATORIO VENDAS");
 
-        tableVendas.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaPeriodoVendas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -67,17 +93,13 @@ public class TelaRelatorioVendas extends javax.swing.JDialog {
                 return canEdit [columnIndex];
             }
         });
-        table.setViewportView(tableVendas);
+        table.setViewportView(tabelaPeriodoVendas);
 
         lblValorTotal.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
         lblValorTotal.setForeground(new java.awt.Color(255, 255, 255));
         lblValorTotal.setText("VALOR TOTAL DAS VENDAS :");
 
-        btnAtualizar.setBackground(new java.awt.Color(136, 115, 70));
-        btnAtualizar.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
-        btnAtualizar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAtualizar.setText("Atualizar Relatorio");
-        btnAtualizar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtValorTotal.setEditable(false);
 
         jPanel2.setBackground(new java.awt.Color(0, 0, 0));
 
@@ -93,12 +115,17 @@ public class TelaRelatorioVendas extends javax.swing.JDialog {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Data Fim:");
 
-        jButton1.setBackground(new java.awt.Color(136, 115, 70));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton1.setText("Consultar");
-        jButton1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnConsultarRelatorio.setBackground(new java.awt.Color(136, 115, 70));
+        btnConsultarRelatorio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnConsultarRelatorio.setForeground(new java.awt.Color(255, 255, 255));
+        btnConsultarRelatorio.setText("Consultar");
+        btnConsultarRelatorio.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnConsultarRelatorio.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnConsultarRelatorio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConsultarRelatorioActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -109,37 +136,37 @@ public class TelaRelatorioVendas extends javax.swing.JDialog {
                 .addComponent(jLabel2)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(32, 32, 32)
-                        .addComponent(jLabel3)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 40, Short.MAX_VALUE)
+                        .addComponent(dataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, Short.MAX_VALUE)
                         .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(btnConsultarRelatorio)))
                 .addGap(34, 34, 34))
         );
-
-        jPanel2Layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jFormattedTextField1, jFormattedTextField2});
-
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4)
-                    .addComponent(jFormattedTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-                .addComponent(jButton1)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(12, 12, 12)
+                        .addComponent(jLabel3)
+                        .addGap(6, 6, 6))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(jLabel4)
+                        .addComponent(dataInicial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(dataFinal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                .addComponent(btnConsultarRelatorio)
                 .addContainerGap())
         );
 
@@ -160,14 +187,9 @@ public class TelaRelatorioVendas extends javax.swing.JDialog {
                                 .addComponent(table, javax.swing.GroupLayout.PREFERRED_SIZE, 452, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGroup(jPanel1Layout.createSequentialGroup()
                             .addContainerGap()
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(lblValorTotal)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(txtValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(btnAtualizar)
-                                    .addGap(133, 133, 133))))))
+                            .addComponent(lblValorTotal)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txtValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(57, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -183,9 +205,7 @@ public class TelaRelatorioVendas extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblValorTotal)
                     .addComponent(txtValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(50, 50, 50)
-                .addComponent(btnAtualizar)
-                .addContainerGap(82, Short.MAX_VALUE))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -201,6 +221,24 @@ public class TelaRelatorioVendas extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnConsultarRelatorioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConsultarRelatorioActionPerformed
+        double valorTotal = 0;
+        SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");
+        Venda vendas = new Venda();
+        vendas.setDataInicio(df.format(dataInicial.getDate()));
+        vendas.setDataFim(df.format(dataFinal.getDate()));
+        readRelatorio(vendas);
+        
+        DefaultTableModel valores = (DefaultTableModel) tabelaPeriodoVendas.getModel();
+        
+        for (int i=0; i < valores.getRowCount(); i++) {
+            valorTotal += Double.parseDouble(String.valueOf((valores.getValueAt(i, 3))));
+        }
+        
+        txtValorTotal.setText(String.valueOf(valorTotal));
+        
+    }//GEN-LAST:event_btnConsultarRelatorioActionPerformed
 
     /**
      * @param args the command line arguments
@@ -238,10 +276,9 @@ public class TelaRelatorioVendas extends javax.swing.JDialog {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAtualizar;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JFormattedTextField jFormattedTextField1;
-    private javax.swing.JFormattedTextField jFormattedTextField2;
+    private javax.swing.JButton btnConsultarRelatorio;
+    private com.toedter.calendar.JDateChooser dataFinal;
+    private com.toedter.calendar.JDateChooser dataInicial;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -249,8 +286,8 @@ public class TelaRelatorioVendas extends javax.swing.JDialog {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel lblValorTotal;
+    private javax.swing.JTable tabelaPeriodoVendas;
     private javax.swing.JScrollPane table;
-    private javax.swing.JTable tableVendas;
     private javax.swing.JTextField txtValorTotal;
     // End of variables declaration//GEN-END:variables
 }

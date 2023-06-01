@@ -4,6 +4,9 @@
  */
 package lojainstrumentos.model;
 
+import com.toedter.calendar.JDateChooser;
+import java.util.Date;
+
 /**
  *
  * @author mathe
@@ -12,7 +15,8 @@ public class Venda {
     
     double valorTotal, quantidadeVenda;
     int idProd, idCliente;
-    String produtoVendido, descricaoProd, cpfCli;
+    String produtoVendido, descricaoProd, cpfCli, nomeCliente;
+    String data, dataInicio, dataFim;
     
     public Venda() {
         
@@ -27,6 +31,22 @@ public class Venda {
     //metodo para armazenar ficha de venda em um vetor
    //tentar simplicar a classe importando informações de classes ja existentes
 
+    public String getNomeCliente() {
+        return nomeCliente;
+    }
+    
+    public String getDataInicio() {
+        return dataInicio;
+    }
+
+    public String getDataFim() {
+        return dataFim;
+    }
+    
+    public String getData() {
+        return data;
+    }
+    
     public int getIdCliente() {
         return idCliente;
     }
@@ -55,6 +75,22 @@ public class Venda {
         return cpfCli;
     }
 
+    public void setNomeCliente(String nomeCliente) {
+        this.nomeCliente = nomeCliente;
+    }
+    
+    public void setDataInicio(String dataInicio) {
+        this.dataInicio = dataInicio;
+    }
+
+    public void setDataFim(String dataFim) {
+        this.dataFim = dataFim;
+    }
+    
+    public void setData(String data) {
+        this.data = data;
+    }
+    
     public void setIdCliente(int idCliente) {
         this.idCliente = idCliente;
     }
