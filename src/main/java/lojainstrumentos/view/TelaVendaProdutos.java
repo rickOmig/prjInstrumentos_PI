@@ -73,6 +73,7 @@ public class TelaVendaProdutos extends javax.swing.JDialog {
         jScrollPane3 = new javax.swing.JScrollPane();
         tableProdutos = new javax.swing.JTable();
         btnAdicionar = new javax.swing.JButton();
+        btnRemover = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setLocation(new java.awt.Point(600, 300));
@@ -170,6 +171,13 @@ public class TelaVendaProdutos extends javax.swing.JDialog {
             }
         });
 
+        btnRemover.setText("Remover");
+        btnRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRemoverActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -203,7 +211,8 @@ public class TelaVendaProdutos extends javax.swing.JDialog {
                                 .addComponent(btnFinalizarCompra)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 531, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnRemover, javax.swing.GroupLayout.Alignment.LEADING))))
                         .addGap(0, 79, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -224,7 +233,9 @@ public class TelaVendaProdutos extends javax.swing.JDialog {
                     .addComponent(lblDigiteCPF))
                 .addGap(28, 28, 28)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(35, 35, 35)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnRemover)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jtxtValorTotal, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lblValorTotal)
@@ -249,7 +260,7 @@ public class TelaVendaProdutos extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnFinalizarCompraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFinalizarCompraActionPerformed
-        boolean retorno=false;
+        boolean retorno = false;
         try {
             // validação obrigatoria
             if (tableCarrinho.getRowCount() == 0) {
@@ -319,10 +330,10 @@ public class TelaVendaProdutos extends javax.swing.JDialog {
             spnQuantidade.getValue(),
             produtos.getValueAt(linhaSelecionada, 3).toString(),
             produtos.getValueAt(linhaSelecionada, 4).toString()};
-        
-        double quantidade =+ Double.parseDouble(spnQuantidade.getValue().toString());
-        double precoUnitario =+ Double.parseDouble(produtos.getValueAt(linhaSelecionada, 3).toString());
-        double valorTotal = precoUnitario*quantidade;
+
+        double quantidade = +Double.parseDouble(spnQuantidade.getValue().toString());
+        double precoUnitario = +Double.parseDouble(produtos.getValueAt(linhaSelecionada, 3).toString());
+        double valorTotal = precoUnitario * quantidade;
         carrinho.addRow(dados);
 
         jtxtValorTotal.setText(String.valueOf(valorTotal));
@@ -342,8 +353,13 @@ public class TelaVendaProdutos extends javax.swing.JDialog {
     }//GEN-LAST:event_btnAdicionarActionPerformed
 
     private void jtxtValorTotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jtxtValorTotalActionPerformed
- 
+
     }//GEN-LAST:event_jtxtValorTotalActionPerformed
+
+    private void btnRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRemoverActionPerformed
+        DefaultTableModel model = (DefaultTableModel) this.tableCarrinho.getModel();
+        model.removeRow(tableCarrinho.getSelectedRow());
+    }//GEN-LAST:event_btnRemoverActionPerformed
 
     /**
      * @param args the command line arguments
@@ -388,6 +404,7 @@ public class TelaVendaProdutos extends javax.swing.JDialog {
     private javax.swing.JLabel TelaVendas;
     private javax.swing.JButton btnAdicionar;
     private javax.swing.JButton btnFinalizarCompra;
+    private javax.swing.JButton btnRemover;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
